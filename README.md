@@ -192,17 +192,34 @@ GetCoverage.pl makes use of BEDTools to calculate the per-base read coverage at 
 	GetCoverage.pl -c <cuffcompare.combined.gtf> -b <mapped_reads.bam> \
 	-g <.genome file> -o <output>
 
-+---------+--------------------------------------------+
-| Options | Description                                |
-+=========+============================================+
-| -c      | Path to the cuffcompare combined.gtf file  |
-+---------+--------------------------------------------+
-| -b      | Path to the mapped reads BAM file          |
-+---------+--------------------------------------------+
-| -g      | Path to the .genome file                   |
-+---------+--------------------------------------------+
-| -o      | Name of the output .coverage file          |
-+---------+--------------------------------------------+
+<table>
+<col width="13%" />
+<col width="62%" />
+<thead>
+<tr class="header">
+<th align="left">Options</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">-c</td>
+<td align="left">Path to the cuffcompare combined.gtf file</td>
+</tr>
+<tr class="even">
+<td align="left">-b</td>
+<td align="left">Path to the mapped reads BAM file</td>
+</tr>
+<tr class="odd">
+<td align="left">-g</td>
+<td align="left">Path to the .genome file</td>
+</tr>
+<tr class="even">
+<td align="left">-o</td>
+<td align="left">Name of the output .coverage file</td>
+</tr>
+</tbody>
+</table>
 
 
 The .genome file is a two column tab-delimited file stating each chromosome/scaffold name and it's size in base pairs. BEDTools is shipped with .genome files for mouse and human reference genomes. If you are working with a different species you will have to create one yourself, see the BEDTools manual (<http://code.google.com/p/bedtools/>) for more information. 
@@ -225,33 +242,70 @@ TSS-Optimizer.pl is a wrapper script for the main TSS prediction algorithm. For 
 	TSS-Optimizer.pl -a <Annotations.gtf> -cd <Cufflinks_directory> \
 	-cc <Cuffcompare_prefix> -t <tmap_file> -co <Coverage_file> -ch <chromosome>
 
-+---------+---------------+--------------------------------------------------+
-| Options | Default       | Description                                      |
-+=========+===============+==================================================+
-| -a      | []            | The main reference annotation file               |
-|         |               | i.e. the one used with Cuffcompare               |
-+---------+---------------+--------------------------------------------------+
-| -cd     | []            | Path to the Cufflinks directory                  |
-+---------+---------------+--------------------------------------------------+
-| -cc     | []            | Prefix used when running Cuffcompare             |
-+---------+---------------+--------------------------------------------------+
-| -t      | []            | Path to the Cuffcompare transcripts.gtf.tmap file|
-+---------+---------------+--------------------------------------------------+
-| -co     | []            | Path to the .coverage file produced by           |
-|         |               | GetCoverage.pl                                   |
-+---------+---------------+--------------------------------------------------+
-| -ch     | []            | Name of chromosome for optimization              |
-+---------+---------------+--------------------------------------------------+
-| -s      | [0.01]        | Coverage cutoff fraction to begin trimming       |
-+---------+---------------+--------------------------------------------------+
-| -e      | [0.20]        | Coverage cutoff fraction to end trimming         |
-+---------+---------------+--------------------------------------------------+
-| -i      | [0.01]        | Increment, or step size, between lower and upper |
-|         |               | coverage cutoff fractions                        |
-+---------+---------------+--------------------------------------------------+
-| -o      | [./Optimizer] | Output directory (this will be suffixed with the |
-|         |               | selected chromosome)                             |
-+---------+---------------+--------------------------------------------------+
+<table>
+<col width="12%" />
+<col width="20%" />
+<col width="66%" />
+<thead>
+<tr class="header">
+<th align="left">Options</th>
+<th align="left">Default</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">-a</td>
+<td align="left">[]</td>
+<td align="left">The main reference annotation file i.e. the one used with Cuffcompare</td>
+</tr>
+<tr class="even">
+<td align="left">-cd</td>
+<td align="left">[]</td>
+<td align="left">Path to the Cufflinks directory</td>
+</tr>
+<tr class="odd">
+<td align="left">-cc</td>
+<td align="left">[]</td>
+<td align="left">Prefix used when running Cuffcompare</td>
+</tr>
+<tr class="even">
+<td align="left">-t</td>
+<td align="left">[]</td>
+<td align="left">Path to the Cuffcompare transcripts.gtf.tmap file</td>
+</tr>
+<tr class="odd">
+<td align="left">-co</td>
+<td align="left">[]</td>
+<td align="left">Path to the .coverage file produced by GetCoverage.pl</td>
+</tr>
+<tr class="even">
+<td align="left">-ch</td>
+<td align="left">[]</td>
+<td align="left">Name of chromosome for optimization</td>
+</tr>
+<tr class="odd">
+<td align="left">-s</td>
+<td align="left">[0.01]</td>
+<td align="left">Coverage cutoff fraction to begin trimming</td>
+</tr>
+<tr class="even">
+<td align="left">-e</td>
+<td align="left">[0.20]</td>
+<td align="left">Coverage cutoff fraction to end trimming</td>
+</tr>
+<tr class="odd">
+<td align="left">-i</td>
+<td align="left">[0.01]</td>
+<td align="left">Increment, or step size, between lower and upper coverage cutoff fractions</td>
+</tr>
+<tr class="even">
+<td align="left">-o</td>
+<td align="left">[./Optimizer]</td>
+<td align="left">Output directory (this will be suffixed with the selected chromosome)</td>
+</tr>
+</tbody>
+</table>
 
 Running TSS-Optimizer for our data set is simple. We use the following command:-
 
@@ -278,30 +332,60 @@ In this next step we run TSS-Predictor to predict transcription start sites geno
 	TSS-Predictor.pl -a <Annotations.gtf> -cd <Cufflinks_directory> \
 	-cc <Cuffcompare_prefix> -t <tmap_file> -co <Coverage_file>
 
-+---------+---------------------+--------------------------------------------+
-| Options | Default             | Description                                |
-+=========+=====================+============================================+
-| -a      | []                  | The main reference annotation file         |
-|         |                     | i.e. the one used with Cuffcompare         |
-+---------+---------------------+--------------------------------------------+
-| -cd     | []                  | Path to the Cufflinks directory            |
-+---------+---------------------+--------------------------------------------+
-| -cc     | []                  | Cuffcompare prefix                         |
-+---------+---------------------+--------------------------------------------+
-| -t      | []                  | Path to Cuffcompare transcripts.gtf.tmap   |
-+---------+---------------------+--------------------------------------------+
-| -co     | []                  | Path to the .coverage file produced by     |
-|         |                     | GetCoverage.pl                             |
-+---------+---------------------+--------------------------------------------+
-| -f      | [0.1]               | Cutoff fraction (of expected per-base      |
-|         |                     | coverage) to trim annotations              |
-+---------+---------------------+--------------------------------------------+
-| -u      | [1]                 | Number of bases upstream of predicted TSS  |
-|         |                     | to report                                  |
-+---------+---------------------+--------------------------------------------+
-| -d      | [0]                 | Number of bases downstream of predicted    |
-|         |                     | TSS to report                              |
-+---------+---------------------+--------------------------------------------+
+<table>
+<col width="12%" />
+<col width="28%" />
+<col width="58%" />
+<thead>
+<tr class="header">
+<th align="left">Options</th>
+<th align="left">Default</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">-a</td>
+<td align="left">[]</td>
+<td align="left">The main reference annotation file i.e. the one used with Cuffcompare</td>
+</tr>
+<tr class="even">
+<td align="left">-cd</td>
+<td align="left">[]</td>
+<td align="left">Path to the Cufflinks directory</td>
+</tr>
+<tr class="odd">
+<td align="left">-cc</td>
+<td align="left">[]</td>
+<td align="left">Cuffcompare prefix</td>
+</tr>
+<tr class="even">
+<td align="left">-t</td>
+<td align="left">[]</td>
+<td align="left">Path to Cuffcompare transcripts.gtf.tmap</td>
+</tr>
+<tr class="odd">
+<td align="left">-co</td>
+<td align="left">[]</td>
+<td align="left">Path to the .coverage file produced by GetCoverage.pl</td>
+</tr>
+<tr class="even">
+<td align="left">-f</td>
+<td align="left">[0.1]</td>
+<td align="left">Cutoff fraction (of expected per-base coverage) to trim annotations</td>
+</tr>
+<tr class="odd">
+<td align="left">-u</td>
+<td align="left">[1]</td>
+<td align="left">Number of bases upstream of predicted TSS to report</td>
+</tr>
+<tr class="even">
+<td align="left">-d</td>
+<td align="left">[0]</td>
+<td align="left">Number of bases downstream of predicted TSS to report</td>
+</tr>
+</tbody>
+</table>
 
 
 Next, predict TSS usage genome-wide with a coverage cutoff of 0.04:-
@@ -344,18 +428,40 @@ SelectTSS.pl is used to filter TSS predictions. A tss.selected.bed file is produ
 
 	SelectTSS.pl [options -d -e -r] -o <output prefix>
 
-+---------+---------------------+--------------------------------------------+
-| Options | Default             | Description                                |
-+=========+=====================+============================================+
-| -o      | tss.selected        | Output file prefix                         |
-+---------+---------------------+--------------------------------------------+
-| -d      | []                  | TSS distance cutoff                        |
-+---------+---------------------+--------------------------------------------+
-| -e      | []                  | Expression level cutoff                    |
-+---------+---------------------+--------------------------------------------+
-| -r      | []                  | Report nearest reference transcription     |
-|         |                     | start site                                 |
-+---------+---------------------+--------------------------------------------+
+<table>
+<col width="12%" />
+<col width="28%" />
+<col width="58%" />
+<thead>
+<tr class="header">
+<th align="left">Options</th>
+<th align="left">Default</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">-o</td>
+<td align="left">tss.selected</td>
+<td align="left">Output file prefix</td>
+</tr>
+<tr class="even">
+<td align="left">-d</td>
+<td align="left">[]</td>
+<td align="left">TSS distance cutoff</td>
+</tr>
+<tr class="odd">
+<td align="left">-e</td>
+<td align="left">[]</td>
+<td align="left">Expression level cutoff</td>
+</tr>
+<tr class="even">
+<td align="left">-r</td>
+<td align="left">[]</td>
+<td align="left">Report nearest reference transcription start site</td>
+</tr>
+</tbody>
+</table>
 
 We want to select only high confidence TSS's in our example. The following command will report predicted TSS's that satisfy both distance AND expression criteria:- 
 
@@ -371,16 +477,35 @@ We want to select only high confidence TSS's in our example. The following comma
 
 The coverage file produced by GetCoverage.pl is a tab-delimited text file containing the per-base coverage of each transcribed location on the reference genome as determined by Cufflinks. The file format is as follows:-
 
-+---------------+---------------+----------------------------------------------+
-|Field position |Field name     |Desription                                    |
-+===============+===============+==============================================+
-|1              |Chromosome     |Reference chromosome/scaffold                 |
-+---------------+---------------+----------------------------------------------+
-|2              |Position       |Position on the reference chromosome          |
-+---------------+---------------+----------------------------------------------+
-|3              |Read depth     |Read coverage at position on genome           |
-+---------------+---------------+----------------------------------------------+
-
+<table>
+<col width="20%" />
+<col width="20%" />
+<col width="59%" />
+<thead>
+<tr class="header">
+<th align="left">Field position</th>
+<th align="left">Field name</th>
+<th align="left">Desription</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">Chromosome</td>
+<td align="left">Reference chromosome/scaffold</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">Position</td>
+<td align="left">Position on the reference chromosome</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">Read depth</td>
+<td align="left">Read coverage at position on genome</td>
+</tr>
+</tbody>
+</table>
 
 4.2. trim.combined.gtf
 ----------------------
@@ -394,42 +519,80 @@ The trim.gtf.tmap file is an amended version of the transcripts.gtf.tmap file pr
 
 TSS-Predictor makes use of fields 2 and 10, the rest of the file is produced by Cufflinks. The fields in the trim.gtf tmap file are as follows:
 
-+---------------+---------------+----------------------------------------------+
-|Field position |Field name     |Desription                                    |
-+===============+===============+==============================================+
-|1              |ref\_gene\_id  |Gene name assigned by Cuffcompare             |
-|               |               |(_gene\_name_ attribute of GTF file)          |
-+---------------+---------------+----------------------------------------------+
-|2              |ref\_id        |_gene\_id_ attribute of the the GTF file      |
-+---------------+---------------+----------------------------------------------+
-|3              |class\_code    | Cuffcompare class code                       |
-+---------------+---------------+----------------------------------------------+
-|4              |cuff\_gene\_id | The gene id assigned by Cufflinks. Multiple  |
-|               |               |_cuff\_gene\_id_'s may map to a single        |
-|               |               |_ref\_gene\_id_ attribute                     |
-+---------------+---------------+----------------------------------------------+
-|5              |cuff\_id       | Name of the Cufflinks transcript id selected |
-|               |               | for trimming for _ref\_gene\_id_             |
-+---------------+---------------+----------------------------------------------+
-|6              |FMI            | Expression of this isoform relative to major | 
-|               |               | isoform for the gene (defined by Cufflnks,   |
-|               |               | not used)                                    |
-+---------------+---------------+----------------------------------------------+
-|7              |FPKM           | FPKM for the transcript _cuff\_id_. Note this|
-|               |               | is the transcript (NOT gene) expression      |
-+---------------+---------------+----------------------------------------------+
-|8              |FPKM\_conf\_lo | Upper confidence interval for FPKM           |
-+---------------+---------------+----------------------------------------------+
-|9              |FPKM\_conf\_hi | Lower confidence interval for FPKM           |
-+---------------+---------------+----------------------------------------------+
-|10             |gene.cov       | The per-base coverage estimate for the gene  |
-|               |               | as used by TSS-Predictor                     |
-+---------------+---------------+----------------------------------------------+
-|11             |len            | _cuff\_id_ transcript length                 |
-+---------------+---------------+----------------------------------------------+
-|12             |major\_iso\_id | _cuff\_id_ of the genes (_cuff\_gene\_id_)   |
-|               |               | major isoform                                |
-+---------------+---------------+----------------------------------------------+
+<table>
+<col width="20%" />
+<col width="20%" />
+<col width="59%" />
+<thead>
+<tr class="header">
+<th align="left">Field position</th>
+<th align="left">Field name</th>
+<th align="left">Desription</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">ref_gene_id</td>
+<td align="left">Gene name assigned by Cuffcompare (<em>gene_name</em> attribute of GTF file)</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">ref_id</td>
+<td align="left"><em>gene_id</em> attribute of the the GTF file</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">class_code</td>
+<td align="left">Cuffcompare class code</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">cuff_gene_id</td>
+<td align="left">The gene id assigned by Cufflinks. Multiple <em>cuff_gene_id</em>'s may map to a single <em>ref_gene_id</em> attribute</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">cuff_id</td>
+<td align="left">Name of the Cufflinks transcript id selected for trimming for <em>ref_gene_id</em></td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">FMI</td>
+<td align="left">Expression of this isoform relative to major isoform for the gene (defined by Cufflnks, not used)</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">FPKM</td>
+<td align="left">FPKM for the transcript <em>cuff_id</em>. Note this is the transcript (NOT gene) expression</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="left">FPKM_conf_lo</td>
+<td align="left">Upper confidence interval for FPKM</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="left">FPKM_conf_hi</td>
+<td align="left">Lower confidence interval for FPKM</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="left">gene.cov</td>
+<td align="left">The per-base coverage estimate for the gene as used by TSS-Predictor</td>
+</tr>
+<tr class="odd">
+<td align="left">11</td>
+<td align="left">len</td>
+<td align="left"><em>cuff_id</em> transcript length</td>
+</tr>
+<tr class="even">
+<td align="left">12</td>
+<td align="left">major_iso_id</td>
+<td align="left"><em>cuff_id</em> of the genes (<em>cuff_gene_id</em>) major isoform</td>
+</tr>
+</tbody>
+</table>
 
 
 4.4. isotigs.trimmed.gtf
@@ -443,21 +606,48 @@ The isotigs.trimmed.gtf file is an amended version of the trim.combined.gf file 
 
 This BED (tab delimited) file contains the TSS predictions for each expressed reference gene. By default the TSS lenth is 1 base. Proximal promoter regions flanking the predicted TSS can be extracted by providing TSS-Predictor with the _-u_ and _-d_ flags. Please note that changing the values of _-u_ and _-d_ will affect the distance estimates produced in the distances.txt file. The format of tss.predictions.bed is as follows:-
 
-+---------------+---------------+---------------------------------+
-|Field position |Field name     |Desription                       |
-+---------------+---------------+---------------------------------+
-|1              |Chromosome     | Reference chromosome/scaffold   |
-+---------------+---------------+---------------------------------+
-|2              |Start          | TSS prediction start            |
-+---------------+---------------+---------------------------------+
-|3              |End            | TSS prediction end              | 
-+---------------+---------------+---------------------------------+
-|4              |Gene name      | The reference gene id           | 
-+---------------+---------------+---------------------------------+
-|5              |Score          | Not used                        |
-+---------------+---------------+---------------------------------+
-|6              |Strand         | Strand the reference gene is on |
-+---------------+---------------+---------------------------------+
+<table>
+<col width="22%" />
+<col width="22%" />
+<col width="47%" />
+<tbody>
+<tr class="odd">
+<td align="left">Field position</td>
+<td align="left">Field name</td>
+<td align="left">Desription</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="left">Chromosome</td>
+<td align="left">Reference chromosome/scaffold</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="left">Start</td>
+<td align="left">TSS prediction start</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="left">End</td>
+<td align="left">TSS prediction end</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="left">Gene name</td>
+<td align="left">The reference gene id</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="left">Score</td>
+<td align="left">Not used</td>
+</tr>
+<tr class="odd">
+<td align="left">6</td>
+<td align="left">Strand</td>
+<td align="left">Strand the reference gene is on</td>
+</tr>
+</tbody>
+</table>
 
 
 4.6. distances.txt
@@ -465,24 +655,48 @@ This BED (tab delimited) file contains the TSS predictions for each expressed re
 
 The tab-delimited distances.txt file contains a variety of information for each expressed reference gene. The format of this file is as follows:-
 
-+---------------+---------------------------+----------------------------------+
-|Field position |Field name   	            |Desription                        |
-+---------------+---------------------------+----------------------------------+
-|1              |Gene                       |Reference gene id                 |
-+---------------+---------------------------+----------------------------------+
-|2              |Chr                        |Chromosome                        |
-+---------------+---------------------------+----------------------------------+
-|3              |Prediction\_start          |Predicted TSS                     |
-+---------------+---------------------------+----------------------------------+
-|4              |Nearest\_transcript        |Closese reference transcript to   |
-|               |                           |TSS prediction                    |
-+---------------+---------------------------+----------------------------------+
-|5              |Nearest\_transcript\_start |TSS of nearest annotated reference|
-|               |                           |transcript                        |
-+---------------+---------------------------+----------------------------------+
-|6              |Distance                   |Distance between predicted and    |
-|               |                           |nearest reference TSS             |
-+---------------+---------------------------+----------------------------------+
+<table>
+<col width="20%" />
+<col width="35%" />
+<col width="44%" />
+<tbody>
+<tr class="odd">
+<td align="left">Field position</td>
+<td align="left">Field name</td>
+<td align="left">Desription</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="left">Gene</td>
+<td align="left">Reference gene id</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="left">Chr</td>
+<td align="left">Chromosome</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="left">Prediction_start</td>
+<td align="left">Predicted TSS</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="left">Nearest_transcript</td>
+<td align="left">Closese reference transcript to TSS prediction</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="left">Nearest_transcript_start</td>
+<td align="left">TSS of nearest annotated reference transcript</td>
+</tr>
+<tr class="odd">
+<td align="left">6</td>
+<td align="left">Distance</td>
+<td align="left">Distance between predicted and nearest reference TSS</td>
+</tr>
+</tbody>
+</table>
 
 
 4.7. tss.selected.bed
