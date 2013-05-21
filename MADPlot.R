@@ -14,5 +14,5 @@ mad.dist <- cbind( mad.dist, bar.fill )
 
 #jpeg("Optimizer-MADPlot.jpg")
 pdf("Optimizer-MADPlot.pdf")
-ggplot( mad.dist, aes(rownames(mad.dist), V1, fill=bar.fill ) ) + geom_bar( alpha = 0.85) + scale_fill_manual( values = c("darkgrey","red"), name="Minimum\nMAD" ) + coord_flip() + theme_bw() + labs( x="Cutoff Fraction", y="MAD between predicted \nand nearest annotated TSS for gene (bases)" )
+ggplot( mad.dist, aes(rownames(mad.dist), V1, fill=bar.fill ) ) + geom_bar( alpha = 0.85, stat="identity") + scale_fill_manual( values = c("darkgrey","red"), name="Minimum\nMAD" ) + coord_flip() + theme_bw() + labs( x="Cutoff Fraction", y="MAD between predicted \nand nearest annotated TSS for gene (bases)" )
 dev.off()

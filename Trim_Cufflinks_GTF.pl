@@ -114,6 +114,11 @@ foreach my $chr( sort { $exon_lookup{$a} cmp $exon_lookup{$b} } keys ( %exon_loo
 			if ($coverage{$chr}{$loc} > ($exp_cov * $cutoff) ){
 				$istrim = 1;
 				$lastloc = $loc;
+				if( $exon_info{$chr}{$exon_sort}{'start'} == $loc ){
+					$exon_info{$chr}{$exon_sort}{'exon_code_f'} = 1;
+					$gene_info{$chr}{$tid}{'gene_bound_f'} = $loc;
+					next EXON;
+				}
 				next LOC;
 			} 
 			elsif ($coverage{$chr}{$loc} < ($exp_cov * $cutoff) ){
@@ -133,11 +138,11 @@ foreach my $chr( sort { $exon_lookup{$a} cmp $exon_lookup{$b} } keys ( %exon_loo
 					next EXON;
 				}
 			}
-			if ( ($istrim == 1) && (not defined $exon_info{$chr}{$exon_sort}{'exon_code_f'} ) ){
-				$exon_info{$chr}{$exon_sort}{'exon_code_f'} = 1;
-				$gene_info{$chr}{$tid}{'gene_bound_f'} = $lastloc;
-				next EXON;
-			}
+#			if ( ($istrim == 1) && (not defined $exon_info{$chr}{$exon_sort}{'exon_code_f'} ) ){###This is supposed to ensure that I don't walk off the end of a gene without reporting it. It doesn't work as exon_code_f is always defined. Fix is inserted into loop if ($coverage{$chr}{$loc} > ($exp_cov * $cutoff) ){... Assign gene_bound_r if we walk into the last base of the cufflinks annotation
+#				$exon_info{$chr}{$exon_sort}{'exon_code_f'} = 1;
+#				$gene_info{$chr}{$tid}{'gene_bound_f'} = $lastloc;
+#				next EXON;
+#			}
 		}
 	}
 }
@@ -162,6 +167,11 @@ foreach my $chr( sort { $exon_lookup{$a} cmp $exon_lookup{$b} } keys ( %exon_loo
 			if ($coverage{$chr}{$loc} > ($exp_cov * $cutoff) ){
 				$istrim = 1;
 				$lastloc = $loc;
+				if( $exon_info{$chr}{$exon_sort}{'end'} == $loc ){
+					$exon_info{$chr}{$exon_sort}{'exon_code_r'} = 1;
+					$gene_info{$chr}{$tid}{'gene_bound_r'} = $loc;
+					next EXON;
+				}
 				next LOC;
 			} 
 			elsif ($coverage{$chr}{$loc} < ($exp_cov * $cutoff) ){
@@ -181,11 +191,11 @@ foreach my $chr( sort { $exon_lookup{$a} cmp $exon_lookup{$b} } keys ( %exon_loo
 					next EXON;
 				}
 			}
-			if ( ($istrim == 1) && (not defined $exon_info{$chr}{$exon_sort}{'exon_code_r'} ) ){
-				$exon_info{$chr}{$exon_sort}{'exon_code_r'} = 1;
-				$gene_info{$chr}{$tid}{'gene_bound_r'} = $lastloc;
-				next EXON;
-			}
+#			if ( ($istrim == 1) && (not defined $exon_info{$chr}{$exon_sort}{'exon_code_r'} ) ){###This is supposed to ensure that I don't walk off the end of a gene without reporting it. It doesn't work as exon_code_f is always defined. Fix is inserted into loop if ($coverage{$chr}{$loc} > ($exp_cov * $cutoff) ){... Assign gene_bound_r if we walk into the last base of the cufflinks annotation
+#				$exon_info{$chr}{$exon_sort}{'exon_code_r'} = 1;
+#				$gene_info{$chr}{$tid}{'gene_bound_r'} = $lastloc;
+#				next EXON;
+#			}
 		}
 	}
 }
